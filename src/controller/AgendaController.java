@@ -40,4 +40,5 @@ public class AgendaController {
     public List<Agenda> filterAgenda(Date data){
         return facade.filterAgenda(data);
     }
+    
 }
