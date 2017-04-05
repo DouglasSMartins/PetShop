@@ -345,7 +345,6 @@ public class CadastroCliente extends javax.swing.JFrame {
             cliente.setCidade(this.jTextFieldCidadeCliente.getText());
             cliente.setEstado(this.jTextFieldEstadoCliente.getText());
            
-            
             int result = 0;
             
             if(idCliente == null){
