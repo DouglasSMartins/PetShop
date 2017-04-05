@@ -339,6 +339,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 return;
             }
             
+            
             cliente.setLogradouro(this.jTextFieldLogradouroCliente.getText());
             cliente.setNumero(this.jTextFieldNumeroCliente.getText());
             cliente.setBairro(this.jTextFieldBairroCliente.getText());
