@@ -362,8 +362,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 setVisible(false);
                 telacliente.refreshTable();
                 telacliente.setVisible(true);
-            }
-            
+            }    
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
