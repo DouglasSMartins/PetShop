@@ -11,11 +11,8 @@ import dao.ServicoDAO;
 import entity.Agenda;
 import entity.Cliente;
 import entity.Servico;
-import java.sql.Time;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,7 +35,7 @@ public class CadastroAgenda extends javax.swing.JFrame {
         idAgenda = id;
         
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
