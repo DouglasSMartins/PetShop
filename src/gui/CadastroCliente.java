@@ -332,8 +332,16 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
             
             if(!"(  )     -    ".equals(jFormattedTextFieldCelularCliente.getText()) || !"(  )    -    ".equals(jFormattedTextFieldTelefoneCliente.getText())) {
-                cliente.setCelular(this.jFormattedTextFieldCelularCliente.getText());
-                cliente.setTelefone(this.jFormattedTextFieldTelefoneCliente.getText());
+                if(!"(  )     -    ".equals(jFormattedTextFieldCelularCliente.getText())){
+                    cliente.setCelular(this.jFormattedTextFieldCelularCliente.getText());
+                }else{
+                    cliente.setCelular(null);
+                }
+                if(!"(  )    -    ".equals(jFormattedTextFieldTelefoneCliente.getText())){
+                    cliente.setTelefone(this.jFormattedTextFieldTelefoneCliente.getText());
+                }else{
+                    cliente.setTelefone(null);
+                }
             }else{
                 JOptionPane.showMessageDialog(this, "Preencha pelo menos um telefone para contato!");
                 return;
