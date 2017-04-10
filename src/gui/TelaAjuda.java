@@ -39,7 +39,7 @@ public class TelaAjuda extends javax.swing.JFrame {
         jTextAreaTeste.setEditable(false);
         jTextAreaTeste.setColumns(20);
         jTextAreaTeste.setRows(5);
-        jTextAreaTeste.setText("Sistema desenvolvido por Desenvies Tecnologia.\n\nInicio: Tela do sistema para consultar a agenda de forma prática\ne rápida.\n\nOperacional: Local onde se encontram todos os cadastros de\ndados do sistema, tais como clientes, serviços, estoques. Nela\ntambém é possivel realizar buscas, editar e excluir cadastros.\n\nDuvidas? entre em contato. \nE-mail: desenvies@gmail.com / Whatsapp: (48)99607-9081\n\n\n© Copyright 2017 - Desenvies Tec. Todos os direitos reservados.\nTodas as outras marcas e nomes de produtos são registrados e \nde propriedade de seus respectivos autores.\n\n\t        \n\t          Versão atual: 0.1 - Beta");
+        jTextAreaTeste.setText("Sistema desenvolvido por Desenvies Tecnologia.\n\nInicio: Tela do sistema para consultar a agenda de forma prática\ne rápida.\n\nOperacional: Local onde se encontram todos os cadastros de\ndados do sistema, tais como clientes, serviços, estoques. Nela\ntambém é possivel realizar buscas, editar e excluir cadastros.\n\nDuvidas? entre em contato. \nE-mail: desenviestec@gmail.com / Whatsapp: (48)99607-9081\n\n\n© Copyright 2017 - Desenvies Tec. Todos os direitos reservados.\nTodas as outras marcas e nomes de produtos são registrados e \nde propriedade de seus respectivos autores.\n\n\t        \n\t          Versão atual: 0.1 - Beta");
         jScrollPane1.setViewportView(jTextAreaTeste);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
