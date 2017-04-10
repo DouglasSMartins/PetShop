@@ -7,7 +7,6 @@ package gui;
 
 import controller.ClienteController;
 import entity.Cliente;
-import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JOptionPane;
 import table.ClienteTableModel;
