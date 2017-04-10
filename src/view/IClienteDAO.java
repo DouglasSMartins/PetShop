@@ -18,7 +18,7 @@ public interface IClienteDAO {
     
     int update(Cliente cliente);
     
-    int remove(Long id);
+    int remove(Long id)throws Exception;
     
     List<Cliente> findAll();
     

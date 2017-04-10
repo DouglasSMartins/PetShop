@@ -10,8 +10,10 @@ import entity.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -119,7 +121,7 @@ public class ClienteDAO implements IClienteDAO {
     }
     
     @Override
-    public int remove(Long id) {
+    public int remove(Long id)throws Exception{
         String sql = "DELETE FROM cliente WHERE id = ?";
 
         Connection conn = null;
@@ -136,6 +138,8 @@ public class ClienteDAO implements IClienteDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Exception("Cliente não pode ser removido pois já está sendo usado em um agendamento!");
+            
         } finally {
 
             try {

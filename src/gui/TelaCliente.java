@@ -16,8 +16,8 @@ import table.ClienteTableModel;
  * @author douglas
  */
 public class TelaCliente extends javax.swing.JFrame {
+
     private List<Cliente> clienteList;
-    
 
     /**
      * Creates new form TelaCliente1
@@ -25,20 +25,20 @@ public class TelaCliente extends javax.swing.JFrame {
     public TelaCliente() {
         initComponents();
         setLocationRelativeTo(this);
-        
+
         clienteList = new ClienteController().findClientes();
-            
-        if(clienteList != null){
+
+        if (clienteList != null) {
             jTableCliente.setModel(new ClienteTableModel(clienteList));
         }
     }
-    
-    public void refreshTable(){
-            clienteList = new ClienteController().findClientes();
-            
-            if(clienteList != null){
-                jTableCliente.setModel(new ClienteTableModel(clienteList));
-            }
+
+    public void refreshTable() {
+        clienteList = new ClienteController().findClientes();
+
+        if (clienteList != null) {
+            jTableCliente.setModel(new ClienteTableModel(clienteList));
+        }
     }
 
     /**
@@ -260,12 +260,12 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuInicioMouseClicked
 
     private void jButtonFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFiltrarMouseClicked
-        
-        clienteList = new ClienteController().filterClientes(jTextFieldNome.getText(),jFormattedTextFieldCPF.getText());
-            
-            if(clienteList != null){
-                jTableCliente.setModel(new ClienteTableModel(clienteList));
-            }
+
+        clienteList = new ClienteController().filterClientes(jTextFieldNome.getText(), jFormattedTextFieldCPF.getText());
+
+        if (clienteList != null) {
+            jTableCliente.setModel(new ClienteTableModel(clienteList));
+        }
     }//GEN-LAST:event_jButtonFiltrarMouseClicked
 
     private void jButtonAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAdicionarMouseClicked
@@ -276,15 +276,15 @@ public class TelaCliente extends javax.swing.JFrame {
 
     private void jButtonEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditarMouseClicked
         int rowIndex = jTableCliente.getSelectedRow();
-        
-        if(rowIndex == -1){
+
+        if (rowIndex == -1) {
             JOptionPane.showMessageDialog(this, "Selecione o cliente a ser editado!");
             return;
         }
-        
+
         Cliente cliente = new ClienteTableModel(clienteList).get(rowIndex);
         Long idCliente = cliente.getId();
-        
+
         CadastroCliente editar = new CadastroCliente(idCliente);
         editar.jTextFieldNomeCliente.setText(cliente.getNome());
         editar.jFormattedTextFieldCPFCliente.setText(cliente.getCpf());
@@ -295,10 +295,10 @@ public class TelaCliente extends javax.swing.JFrame {
         editar.jTextFieldBairroCliente.setText(cliente.getBairro());
         editar.jTextFieldCidadeCliente.setText(cliente.getCidade());
         editar.jTextFieldEstadoCliente.setText(cliente.getEstado());
-        
+
         setVisible(false);
         editar.setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonEditarMouseClicked
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -306,29 +306,34 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentResized
 
     private void jButtonExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseClicked
-        int rowIndex = jTableCliente.getSelectedRow();
-        
-        if(rowIndex == -1){
-            JOptionPane.showMessageDialog(this, "Selecione o cliente a ser removido!");
-            return;
+        try {
+            int rowIndex = jTableCliente.getSelectedRow();
+
+            if (rowIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione o cliente a ser removido!");
+                return;
+            }
+
+            Cliente cliente = new ClienteTableModel(clienteList).get(rowIndex);
+            int confirm = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão?", "Excluir Cliente", JOptionPane.YES_NO_OPTION);
+
+            if (confirm != 0) {
+                return;
+            }
+
+            int result = new ClienteController().excluirCliente(cliente.getId());
+
+            if (result == 0) {
+                JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
+                refreshTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tente novamente!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            
         }
-        
-        Cliente cliente = new ClienteTableModel(clienteList).get(rowIndex);
-        int confirm = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão?", "Excluir Cliente", JOptionPane.YES_NO_OPTION);
-        
-        if(confirm != 0){
-            return;
-        }
-        
-        int result = new ClienteController().excluirCliente(cliente.getId());
-        
-        if(result == 0){
-            JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
-            refreshTable();
-        }else{
-            JOptionPane.showMessageDialog(this, "Tente novamente!");
-        }
-        
+
     }//GEN-LAST:event_jButtonExcluirMouseClicked
 
     private void jMenuAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAjudaMouseClicked

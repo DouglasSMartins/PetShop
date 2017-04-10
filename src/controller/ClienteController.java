@@ -29,7 +29,7 @@ public class ClienteController {
         return facade.update(cliente);
     }
     
-    public int excluirCliente(Long id){
+    public int excluirCliente(Long id)throws Exception{
         return facade.remove(id);
     }
     
