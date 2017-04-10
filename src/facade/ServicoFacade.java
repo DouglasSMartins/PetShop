@@ -30,7 +30,7 @@ public class ServicoFacade {
         return dao.update(servico);
     }
     
-    public int remove(Long id){
+    public int remove(Long id)throws Exception{
         return dao.remove(id);
     }
     

@@ -16,6 +16,7 @@ import table.ServicoTableModel;
  * @author douglas
  */
 public class TelaServico extends javax.swing.JFrame {
+
     private List<Servico> servicoList;
 
     /**
@@ -24,18 +25,18 @@ public class TelaServico extends javax.swing.JFrame {
     public TelaServico() {
         initComponents();
         setLocationRelativeTo(this);
-        
+
         servicoList = new ServicoController().findServico();
-            
-        if(servicoList != null){
+
+        if (servicoList != null) {
             jTableServico.setModel(new ServicoTableModel(servicoList));
         }
     }
-    
+
     public void refreshTable() {
         servicoList = new ServicoController().findServico();
-            
-        if(servicoList != null){
+
+        if (servicoList != null) {
             jTableServico.setModel(new ServicoTableModel(servicoList));
         }
     }
@@ -262,44 +263,49 @@ public class TelaServico extends javax.swing.JFrame {
 
     private void jButtonEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditarMouseClicked
         int rowIndex = jTableServico.getSelectedRow();
-        
-        if(rowIndex == -1){
+
+        if (rowIndex == -1) {
             JOptionPane.showMessageDialog(this, "Selecione o serviço a ser editado!");
             return;
         }
-        
+
         Servico servico = new ServicoTableModel(servicoList).get(rowIndex);
         Long idServico = servico.getId();
-        
+
         CadastroServico editar = new CadastroServico(idServico);
         editar.jTextFieldNomeServico.setText(servico.getNome());
-        
+
         setVisible(false);
         editar.setVisible(true);
     }//GEN-LAST:event_jButtonEditarMouseClicked
 
     private void jButtonExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseClicked
-        int rowIndex = jTableServico.getSelectedRow();
-        
-        if(rowIndex == -1){
-            JOptionPane.showMessageDialog(this, "Selecione o serviço a ser removido!");
-            return;
-        }
-        
-        Servico servico = new ServicoTableModel(servicoList).get(rowIndex);
-        int confirm = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão?", "Excluir Serviço", JOptionPane.YES_NO_OPTION);
-        
-        if(confirm != 0){
-            return;
-        }
-        
-        int result = new ServicoController().excluirServico(servico.getId());
-        
-        if(result == 0){
-            JOptionPane.showMessageDialog(this, "Serviço removido com sucesso!");
-            refreshTable();
-        }else{
-            JOptionPane.showMessageDialog(this, "Tente novamente!");
+        try {
+            int rowIndex = jTableServico.getSelectedRow();
+
+            if (rowIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione o serviço a ser removido!");
+                return;
+            }
+
+            Servico servico = new ServicoTableModel(servicoList).get(rowIndex);
+            int confirm = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão?", "Excluir Serviço", JOptionPane.YES_NO_OPTION);
+
+            if (confirm != 0) {
+                return;
+            }
+
+            int result = new ServicoController().excluirServico(servico.getId());
+
+            if (result == 0) {
+                JOptionPane.showMessageDialog(this, "Serviço removido com sucesso!");
+                refreshTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tente novamente!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+
         }
     }//GEN-LAST:event_jButtonExcluirMouseClicked
 

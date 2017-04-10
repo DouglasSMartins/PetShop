@@ -28,7 +28,7 @@ public class ServicoController {
         return facade.update(servico);
     }
     
-    public int excluirServico(Long id){
+    public int excluirServico(Long id)throws Exception{
         return facade.remove(id);
     }
     

@@ -18,7 +18,7 @@ public interface IServicoDAO {
     
     int update(Servico servico);
     
-    int remove(Long id);
+    int remove(Long id)throws Exception;
     
     List<Servico> findAll();
     

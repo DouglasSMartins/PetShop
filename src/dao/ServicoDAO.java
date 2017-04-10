@@ -101,7 +101,7 @@ public class ServicoDAO implements IServicoDAO {
     }
     
     @Override
-    public int remove(Long id) {
+    public int remove(Long id)throws Exception {
         String sql = "DELETE FROM servico WHERE id = ?";
 
         Connection conn = null;
@@ -118,6 +118,7 @@ public class ServicoDAO implements IServicoDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Exception("Serviço não pode ser removido pois já está sendo usado em um agendamento!");
         } finally {
 
             try {
