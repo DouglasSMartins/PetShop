@@ -42,4 +42,8 @@ public class AgendaFacade {
     public List<Agenda> filterAgenda(Date data){
         return dao.filterAgenda(data);
     }
+    
+    public List<Agenda> filterAgendaPeriodo(Date data, Date data2){
+        return dao.filterAgendaPeriodo(data,data2);
+    }
 }

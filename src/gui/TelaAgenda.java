@@ -22,6 +22,7 @@ import table.AgendaTableModel;
  * @author douglas
  */
 public class TelaAgenda extends javax.swing.JFrame {
+
     private List<Agenda> agendaList;
 
     /**
@@ -31,21 +32,25 @@ public class TelaAgenda extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         jXDatePickerAgenda.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+        jXDatePickerAgenda2.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
         jXDatePickerAgenda.setDate(new Date());
-        
+
         agendaList = new AgendaController().findAgenda();
         agendaList = new AgendaController().filterAgenda(jXDatePickerAgenda.getDate());
-            
-        if(agendaList != null){
+
+        if (agendaList != null) {
             jTableAgenda.setModel(new AgendaTableModel(agendaList));
         }
     }
-    
-    public void refreshTable(){
-        agendaList = new AgendaController().findAgenda();
-        agendaList = new AgendaController().filterAgenda(jXDatePickerAgenda.getDate());
-            
-        if(agendaList != null){
+
+    public void refreshTable() {
+        if (jXDatePickerAgenda.getDate() != null && jXDatePickerAgenda2.getDate() == null) {
+            agendaList = new AgendaController().filterAgenda(jXDatePickerAgenda.getDate());
+        } else if (jXDatePickerAgenda.getDate() != null && jXDatePickerAgenda2.getDate() != null) {
+            agendaList = new AgendaController().filterAgendaPeriodo(jXDatePickerAgenda.getDate(), jXDatePickerAgenda2.getDate());
+        }
+
+        if (agendaList != null) {
             jTableAgenda.setModel(new AgendaTableModel(agendaList));
         }
     }
@@ -61,12 +66,15 @@ public class TelaAgenda extends javax.swing.JFrame {
 
         jButtonAdicionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jXDatePickerAgenda = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAgenda = new javax.swing.JTable();
         jButtonEditar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jXDatePickerAgenda2 = new org.jdesktop.swingx.JXDatePicker();
+        jButtonFiltrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInicio = new javax.swing.JMenu();
         jMenuOperacional = new javax.swing.JMenu();
@@ -86,8 +94,6 @@ public class TelaAgenda extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Filtrar Agenda");
-
-        jLabel2.setText("Data:");
 
         jXDatePickerAgenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +125,17 @@ public class TelaAgenda extends javax.swing.JFrame {
         jButtonExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonExcluirMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setText("De:");
+
+        jLabel4.setText("Até:");
+
+        jButtonFiltrar.setText("Filtrar");
+        jButtonFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonFiltrarMouseClicked(evt);
             }
         });
 
@@ -181,24 +198,32 @@ public class TelaAgenda extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jXDatePickerAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXDatePickerAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXDatePickerAgenda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonFiltrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,15 +232,18 @@ public class TelaAgenda extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jXDatePickerAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(jLabel3)
+                    .addComponent(jXDatePickerAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jXDatePickerAgenda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFiltrar))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdicionar)
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -263,78 +291,92 @@ public class TelaAgenda extends javax.swing.JFrame {
 
     private void jButtonEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditarMouseClicked
         int rowIndex = jTableAgenda.getSelectedRow();
-        
-        if(rowIndex == -1){
+
+        if (rowIndex == -1) {
             JOptionPane.showMessageDialog(this, "Selecione o agendamento a ser editado!");
             return;
         }
-        
+
         int indexCliente = 0;
         int indexServico = 0;
-        
+
         Agenda agenda = new AgendaTableModel(agendaList).get(rowIndex);
         Long idAgenda = agenda.getId();
-        
+
         ClienteDAO cliente = new ClienteDAO();
         int countCliente = 1;
-        for(Cliente c: cliente.findAll()){
-            if(c.toString().equals(agenda.getCliente().getNome())){
+        for (Cliente c : cliente.findAll()) {
+            if (c.toString().equals(agenda.getCliente().getNome())) {
                 indexCliente = countCliente;
             }
             countCliente = countCliente + 1;
         }
-        
+
         ServicoDAO servico = new ServicoDAO();
         int countServico = 1;
-        for(Servico s: servico.findAll()){
-            if(s.toString().equals(agenda.getServico().getNome())){
+        for (Servico s : servico.findAll()) {
+            if (s.toString().equals(agenda.getServico().getNome())) {
                 indexServico = countServico;
             }
             countServico = countServico + 1;
         }
-        
+
         CadastroAgenda editar = new CadastroAgenda(idAgenda);
         editar.jXDatePickerAgenda.setDate(agenda.getData());
         editar.jFormattedTextFieldHorario.setText(agenda.getHorario());
         editar.jComboBoxCliente.setSelectedIndex(indexCliente);
         editar.jComboBoxServico.setSelectedIndex(indexServico);
-        
+
         setVisible(false);
         editar.setVisible(true);
     }//GEN-LAST:event_jButtonEditarMouseClicked
 
     private void jButtonExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseClicked
         int rowIndex = jTableAgenda.getSelectedRow();
-        
-        if(rowIndex == -1){
+
+        if (rowIndex == -1) {
             JOptionPane.showMessageDialog(this, "Selecione o agendamento a ser removido!");
             return;
         }
-        
+
         Agenda agenda = new AgendaTableModel(agendaList).get(rowIndex);
         int confirm = JOptionPane.showConfirmDialog(this, "Confirmar a exclusão?", "Excluir Agendamento", JOptionPane.YES_NO_OPTION);
-        
-        if(confirm != 0){
+
+        if (confirm != 0) {
             return;
         }
-        
+
         int result = new AgendaController().excluirAgenda(agenda.getId());
-        
-        if(result == 0){
+
+        if (result == 0) {
             JOptionPane.showMessageDialog(this, "Agendamento removido com sucesso!");
             refreshTable();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Tente novamente!");
         }
     }//GEN-LAST:event_jButtonExcluirMouseClicked
 
     private void jXDatePickerAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePickerAgendaActionPerformed
-        agendaList = new AgendaController().filterAgenda(jXDatePickerAgenda.getDate());
-            
-            if(agendaList != null){
+        /**
+         * agendaList = new
+         * AgendaController().filterAgenda(jXDatePickerAgenda.getDate());
+         *
+         * if(agendaList != null){ jTableAgenda.setModel(new
+         * AgendaTableModel(agendaList));
+        }*
+         */
+    }//GEN-LAST:event_jXDatePickerAgendaActionPerformed
+
+    private void jButtonFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFiltrarMouseClicked
+        if (jXDatePickerAgenda.getDate() != null && jXDatePickerAgenda2.getDate() == null) {
+            agendaList = new AgendaController().filterAgenda(jXDatePickerAgenda.getDate());
+        } else if (jXDatePickerAgenda.getDate() != null && jXDatePickerAgenda2.getDate() != null) {
+            agendaList = new AgendaController().filterAgendaPeriodo(jXDatePickerAgenda.getDate(), jXDatePickerAgenda2.getDate());
+        }
+        if (agendaList != null) {
             jTableAgenda.setModel(new AgendaTableModel(agendaList));
         }
-    }//GEN-LAST:event_jXDatePickerAgendaActionPerformed
+    }//GEN-LAST:event_jButtonFiltrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -375,8 +417,10 @@ public class TelaAgenda extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuAgenda;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBar1;
@@ -388,5 +432,6 @@ public class TelaAgenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTableAgenda;
     private org.jdesktop.swingx.JXDatePicker jXDatePickerAgenda;
+    private org.jdesktop.swingx.JXDatePicker jXDatePickerAgenda2;
     // End of variables declaration//GEN-END:variables
 }

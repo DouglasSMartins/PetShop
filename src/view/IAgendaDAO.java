@@ -25,4 +25,6 @@ public interface IAgendaDAO {
     
     List<Agenda> filterAgenda(Date data);
     
+    List<Agenda> filterAgendaPeriodo(Date data, Date data2);
+    
 }
