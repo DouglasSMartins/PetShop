@@ -6,6 +6,7 @@
 package petshop;
 
 import gui.TelaInicial;
+import gui.TelaLogin;
 
 /**
  *
@@ -17,8 +18,10 @@ public class PetShop {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TelaInicial inicial = new TelaInicial();
-        inicial.setVisible(true);
+        TelaLogin login = new TelaLogin();
+        login.setVisible(true);
+        /**TelaInicial inicial = new TelaInicial();
+        inicial.setVisible(true);**/
     }
     
 }

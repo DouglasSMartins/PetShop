@@ -10,6 +10,7 @@ import entity.Agenda;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import table.AgendaTableModel;
 
 /**
@@ -59,6 +60,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuEstoque = new javax.swing.JMenuItem();
         jMenuServico = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
+        jMenuSair = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -152,6 +154,14 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuAjuda);
 
+        jMenuSair.setText("Sair");
+        jMenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuSairMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuSair);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,6 +245,13 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jXDatePickerAgendaActionPerformed
 
+    private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
+        TelaLogin login = new TelaLogin();
+        JOptionPane.showMessageDialog(this, "Deslogado com sucesso!");
+        setVisible(false);
+        login.setVisible(true);
+    }//GEN-LAST:event_jMenuSairMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +298,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuEstoque;
     private javax.swing.JMenu jMenuInicio;
     private javax.swing.JMenu jMenuOperacional;
+    private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenuItem jMenuServico;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAgenda;

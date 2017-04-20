@@ -4,13 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/douglas/NetBeansProjects/PetShop/src/dao/AgendaDAO.java</file>
-            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/gui/TelaInicial.java</file>
-            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/gui/CadastroAgenda.java</file>
-            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/view/IAgendaDAO.java</file>
-            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/facade/AgendaFacade.java</file>
-            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/gui/TelaAgenda.java</file>
+            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/controller/UsuarioController.java</file>
+            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/view/IUsuarioDAO.java</file>
+            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/facade/UsuarioFacade.java</file>
             <file>file:/Users/douglas/NetBeansProjects/PetShop/src/gui/TelaLogin.java</file>
             <file>file:/Users/douglas/NetBeansProjects/PetShop/src/controller/AgendaController.java</file>
+            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/dao/UsuarioDAO.java</file>
+            <file>file:/Users/douglas/NetBeansProjects/PetShop/src/entity/Usuario.java</file>
         </group>
     </open-files>
 </project-private>
